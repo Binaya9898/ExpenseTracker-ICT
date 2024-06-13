@@ -1,3 +1,5 @@
+import Page from "./register/page";
+
 export default function Home() {
-  return <h1>First Page</h1>;
+  return <Page />;
 }
