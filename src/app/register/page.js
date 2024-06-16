@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container } from "react-bootstrap";
 import { SignUpSchema } from "./type";
+import baseServer from "../../server";
 
 export default function Page() {
   const {
@@ -15,7 +16,22 @@ export default function Page() {
   });
   const [data, setData] = useState("");
 
-  const onSubmit = (formData) => setData(JSON.stringify(formData));
+  const onSubmit = async (formData) => {
+    setData(JSON.stringify(formData));
+    const response = await fetch(baseServer.postUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    console.log(`The response code is ${response.status}`);
+  };
 
   return (
     <Container className="col-md-4 mt-4">

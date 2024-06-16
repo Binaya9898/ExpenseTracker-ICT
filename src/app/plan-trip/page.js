@@ -6,6 +6,7 @@ import { tripPlan } from "../register/type";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import SERVER from "../server";
 
 export default function Page() {
   const {
@@ -20,7 +21,7 @@ export default function Page() {
   const onSubmit = async (formData) => {
     // display();
     setData(JSON.stringify(formData));
-    const postData = await axios.post(url.data, {
+    const postData = await axios.post(SERVER.primaryUrl, {
       headers: {
         "Content-Type": "application/json",
       },

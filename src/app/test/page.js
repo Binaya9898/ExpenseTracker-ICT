@@ -1,13 +1,12 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import baseServer from "../../server";
 
 export default function Page() {
   async function getData() {
     try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos"
-      );
+      const response = await axios.get(baseServer.baseUrl);
       return response.data;
     } catch (err) {
       console.error(err);
